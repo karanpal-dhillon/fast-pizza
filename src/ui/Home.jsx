@@ -1,9 +1,11 @@
 const Home = () => {
   return (
     <div>
-      <h1>
+      <h1 className="text-xl font-bold text-center">
         The best pizza <br />
-        straight out of oven, straight to you.
+        <span className="text-yellow-500">
+          straight out of oven, straight to you.
+        </span>
       </h1>
     </div>
   );

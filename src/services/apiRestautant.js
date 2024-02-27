@@ -6,3 +6,31 @@ export const getMenu = async () => {
   const { data } = await res.json();
   return data;
 };
+
+export const getOrderById = async (id) => {
+  const res = await fetch(`${API_URL}/order/${id}`);
+  if (!res.ok) {
+    console.log(await res.json());
+    throw new Error(
+      "Failed to get order data: underlying message is " + res.message,
+    );
+  }
+  const { data } = await res.json();
+  return data;
+};
+
+export const createOrder = async (order) => {
+  const res = await fetch(`${API_URL}/order`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(order),
+  });
+  if (!res.ok) {
+    console.log(await res.json());
+    throw new Error("Failed to create order");
+  }
+  const { data } = await res.json();
+  return data;
+};
