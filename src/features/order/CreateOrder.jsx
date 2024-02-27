@@ -26,7 +26,7 @@ const fakeCart = [
 ];
 const CreateOrder = () => {
   return (
-    <Form method="POST">
+    <Form className="" method="POST">
       <h2>Ready to order? Lets go</h2>
       <div>
         <label htmlFor="firstName">First Name</label>
