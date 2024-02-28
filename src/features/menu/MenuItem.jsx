@@ -1,16 +1,18 @@
 import PropTypes from "prop-types";
+import Button from '../../ui/Button'
 import { formatCurrency } from "../../utils/helpers";
 
 const MenuItem = ({ pizza }) => {
   const { _id, imageUrl, name, unitPrice, ingredients, soldOut } = pizza;
   return (
-    <li>
-      <img alt={name} src={imageUrl} />
-      <div>
-        <p>{name}</p>
-        <p>{ingredients.join(", ")}</p>
-        <div>
-          {!soldOut ? <p>{formatCurrency(unitPrice)}</p> : <p>Sold out</p>}
+    <li className="flex gap-4 py-2">
+      <img alt={name} className={`h-24 ${soldOut ? 'opacity-70 grayscale' : ''}`} src={imageUrl} />
+      <div className="flex flex-col grow pt-0.5 ">
+        <p className="font-medium">{name}</p>
+        <p className="text-sm capitalize italic text-stone-500">{ingredients.join(", ")}</p>
+        <div className="mt-auto flex justify-between">
+          {!soldOut ? <p className="text-sm">{formatCurrency(unitPrice)}</p> : <p className="text-sm font-medium uppercase text-stone-500">Sold out</p>}
+          <Button type="small">Add to cart</Button>
         </div>
       </div>
     </li>

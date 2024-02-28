@@ -17,6 +17,7 @@ import Home from "./ui/Home";
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
+    errorElement: <Error />,
     children: [
       {
         path: "/",
