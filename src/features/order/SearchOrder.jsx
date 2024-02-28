@@ -13,6 +13,7 @@ const SearchOrder = () => {
   return (
     <form onSubmit={handleSubmit}>
       <input
+        className="rounded-full bg-yellow-100 px-4 py-2 text-sm w-32 sm:w-64 focus:w-72 transition-all duration-300 focus:outline-none focus:ring focus:ring-yellow-200 "
         placeholder="Order #"
         type="search"
         value={query}

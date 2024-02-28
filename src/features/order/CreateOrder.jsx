@@ -1,6 +1,8 @@
 import { Form } from "react-router-dom";
 import { redirect } from "react-router-dom";
+import { useNavigation } from "react-router-dom";
 import { createOrder } from "../../services/apiRestautant";
+import Button from "../../ui/Button";
 const fakeCart = [
   {
     pizzaId: 12,
@@ -25,27 +27,41 @@ const fakeCart = [
   },
 ];
 const CreateOrder = () => {
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === 'submitting'
   return (
+    // TODO error handling in the form
     <Form className="" method="POST">
       <h2>Ready to order? Lets go</h2>
       <div>
         <label htmlFor="firstName">First Name</label>
-        <input id="firstName" name="customer" type="text" />
+        <div>
+          <input className="input" id="firstName" name="customer" placeholder="Enter your full name" type="text" />
+        </div>
       </div>
       <div>
         <label htmlFor="phone">Phone number</label>
-        <input name="phone" type="text" />
+        <div>
+          <input className="input" name="phone" type="text" />
+        </div>
       </div>
       <div>
         <label htmlFor="address">Address</label>
-        <input name="address" type="text" />
+        <div>
+          <input className="input" name="address" type="text" />
+        </div>
       </div>
       <div>
-        <input id="priority" name="priority" type="checkbox" />
+        <input className="w-6 h-6 accent-yellow-400 focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-1" id="priority" name="priority" type="checkbox" />
         <label htmlFor="priority">Want to give your order a priority?</label>
       </div>
       <input name="cart" type="hidden" value={JSON.stringify(fakeCart)} />
-      <button>Order now</button>
+      <Button disabled={isSubmitting}>
+        {
+          isSubmitting ? 'Placing Order' : 'Order now'
+        }
+      </Button>
+
     </Form>
   );
 };
