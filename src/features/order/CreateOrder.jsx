@@ -31,38 +31,39 @@ const CreateOrder = () => {
   const isSubmitting = navigation.state === 'submitting'
   return (
     // TODO error handling in the form
-    <Form className="" method="POST">
-      <h2>Ready to order? Lets go</h2>
-      <div>
-        <label htmlFor="firstName">First Name</label>
-        <div>
-          <input className="input" id="firstName" name="customer" placeholder="Enter your full name" type="text" />
+    <div className="px-4 py-6">
+      <h2 className="text-xl font-semibold mb-8">Ready to order? Lets go</h2>
+      <Form method="POST">
+        <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
+          <label className="sm:basis-40" htmlFor="firstName">First Name</label>
+          <div className="grow">
+            <input className="input" id="firstName" name="customer" placeholder="Enter your full name" type="text" />
+          </div>
         </div>
-      </div>
-      <div>
-        <label htmlFor="phone">Phone number</label>
-        <div>
-          <input className="input" name="phone" type="text" />
+        <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
+          <label className="sm:basis-40" htmlFor="phone">Phone number</label>
+          <div className="grow">
+            <input className="input" name="phone" type="text" />
+          </div>
         </div>
-      </div>
-      <div>
-        <label htmlFor="address">Address</label>
-        <div>
-          <input className="input" name="address" type="text" />
+        <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
+          <label className="sm:basis-40" htmlFor="address">Address</label>
+          <div className="grow">
+            <input className="input" name="address" type="text" />
+          </div>
         </div>
-      </div>
-      <div>
-        <input className="w-6 h-6 accent-yellow-400 focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-1" id="priority" name="priority" type="checkbox" />
-        <label htmlFor="priority">Want to give your order a priority?</label>
-      </div>
-      <input name="cart" type="hidden" value={JSON.stringify(fakeCart)} />
-      <Button disabled={isSubmitting}>
-        {
-          isSubmitting ? 'Placing Order' : 'Order now'
-        }
-      </Button>
-
-    </Form>
+        <div className="flex gap-2 items-center mb-8">
+          <input className="w-6 h-6 accent-yellow-400 focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-1" id="priority" name="priority" type="checkbox" />
+          <label htmlFor="priority">Want to give your order a priority?</label>
+        </div>
+        <input name="cart" type="hidden" value={JSON.stringify(fakeCart)} />
+        <Button disabled={isSubmitting} type="primary">
+          {
+            isSubmitting ? 'Placing Order' : 'Order now'
+          }
+        </Button>
+      </Form>
+    </div>
   );
 };
 

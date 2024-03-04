@@ -14,7 +14,7 @@ const CreateUser = () => {
       <input className="w-72 input mb-4" name="username" placeholder="Your full name" type="text" value={username} onChange={e => setUsername(e.target.value)} />
       {
         username !== '' && (<div className="mt-4">
-          <Button onClick={() => navigate('/order/new')}>
+          <Button type="primary" onClick={() => navigate('/order/new')}>
             Start ordering
           </Button>
         </div>)
