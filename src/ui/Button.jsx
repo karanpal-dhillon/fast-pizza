@@ -11,11 +11,14 @@ const Button = ({ children, type, onClick, disabled, to }) => {
   if (to)
     return <Link className={styles[type]} to={to}>{children}</Link>
 
-  return (
-    <button className={styles[type]} disabled={disabled} onClick={onClick} >
+  if (onClick)
+    return <button className={styles[type]} disabled={disabled} onClick={onClick} >
       {children}
     </button>
-  )
+
+  return <button className={styles[type]} disabled={disabled}>
+    {children}
+  </button>
 }
 
 Button.propTypes = {

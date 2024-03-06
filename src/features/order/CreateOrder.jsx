@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { Form } from "react-router-dom";
 import { redirect } from "react-router-dom";
 import { useNavigation } from "react-router-dom";
@@ -27,6 +28,8 @@ const fakeCart = [
   },
 ];
 const CreateOrder = () => {
+  const { username } = useSelector(state => state.user)
+
   const navigation = useNavigation();
   const isSubmitting = navigation.state === 'submitting'
   return (
@@ -37,7 +40,7 @@ const CreateOrder = () => {
         <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
           <label className="sm:basis-40" htmlFor="firstName">First Name</label>
           <div className="grow">
-            <input className="input" id="firstName" name="customer" placeholder="Enter your full name" type="text" />
+            <input className="input" defaultValue={username} id="firstName" name="customer" placeholder="Enter your full name" type="text" />
           </div>
         </div>
         <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
