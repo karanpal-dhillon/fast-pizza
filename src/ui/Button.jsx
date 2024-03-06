@@ -6,6 +6,7 @@ const Button = ({ children, type, onClick, disabled, to }) => {
   const styles = {
     primary: baseClasses + ' px-4 py-3 md:px-6 md:py-4',
     small: baseClasses + ' px-4 py-2 md:px-5 md:px-2.5 text-xs',
+    round: baseClasses + ' px-2.5 py-1 md:px-3.5 md:px-2 text-sm',
     secondary: "text-stone-400 text-sm border border-2 border-stone-300  uppercase inline-block font-semibold tracking-wide rounded-full hover:bg-stone-300 hover:text-stone-700 transition-colors duration-300 focus:outline-none focus:ring focus:ring-stone-300 focus:ring-offset-2 focus:bg-stone-300 disabled:cursor-not-allowed px-4 py-2.5 md:px-6 md:py-3.5"
   }
   if (to)
