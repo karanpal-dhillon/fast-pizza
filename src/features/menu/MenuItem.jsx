@@ -1,10 +1,11 @@
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import Button from '../../ui/Button'
 import { formatCurrency } from "../../utils/helpers";
 import { addItem, getQuantityById } from "../cart/cartSlice";
-import { useSelector } from "react-redux";
 import DeleteItem from "../cart/DeleteItem";
+import UpdateQuantity from "../cart/UpdateQuantity";
 
 const MenuItem = ({ pizza }) => {
   const { id, imageUrl, name, unitPrice, ingredients, soldOut } = pizza;
@@ -28,10 +29,14 @@ const MenuItem = ({ pizza }) => {
         <div className="mt-auto flex justify-between">
           {!soldOut ? <p className="text-sm">{formatCurrency(unitPrice)}</p> : <p className="text-sm font-medium uppercase text-stone-500">Sold out</p>}
           {
-            !soldOut && (
-              !isInCart ?
-                <Button type="small" onClick={handleClick}>Add to cart</Button> :
-                <DeleteItem pizzaId={id} />
+            !soldOut && isInCart && <div className="flex gap-3 sm:gap-8 items-center">
+              <UpdateQuantity pizzaId={id} quantity={quantityInCart} />
+              <DeleteItem pizzaId={id} />
+            </div>
+          }
+          {
+            !soldOut && !isInCart && (
+              <Button type="small" onClick={handleClick}>Add to cart</Button>
             )
           }
         </div>

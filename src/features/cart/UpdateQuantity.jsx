@@ -1,14 +1,14 @@
-import { useDispatch } from "react-redux"
-import Button from "../../ui/Button"
 import PropTypes from 'prop-types'
-import { increaseQuantity, decreaseQuantity } from "./cartSlice"
+import { useDispatch } from "react-redux"
+import { decreaseQuantity, increaseQuantity } from "./cartSlice"
+import Button from "../../ui/Button"
 
 const UpdateQuantity = ({ pizzaId, quantity }) => {
   const dispatch = useDispatch()
   return (
-    <div className="flex gap-1">
+    <div className="flex gap-2 md:gap-3 items-center">
       <Button type="round" onClick={() => dispatch(decreaseQuantity(pizzaId))}>-</Button>
-      {quantity}
+      <span className='font-semibold text-sm'> {quantity}</span>
       <Button type="round" onClick={() => dispatch(increaseQuantity(pizzaId))}>+</Button>
     </div>
   )
