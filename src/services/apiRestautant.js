@@ -34,3 +34,16 @@ export const createOrder = async (order) => {
   const { data } = await res.json();
   return data;
 };
+
+export const updateOrder = async (id, updateObj) => {
+  const res = await fetch(`${API_URL}/order/${id}`, {
+    method: 'PATCH',
+    body: JSON.stringify(updateObj),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  if (!res.ok) {
+    throw new Error("Failed to update your order")
+  }
+}

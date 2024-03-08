@@ -1,5 +1,8 @@
+import { useEffect } from "react";
 import { useLoaderData } from "react-router-dom";
+import { useFetcher } from "react-router-dom";
 import OrderItem from "./OrderItem";
+import UpdateOrder from "./UpdateOrder";
 import { getOrderById } from "../../services/apiRestautant";
 import { calculateMinsLeft, formatCurrency, formatDate } from "../../utils/helpers";
 
@@ -10,6 +13,13 @@ export async function loader({ params }) {
 
 const Order = () => {
   const order = useLoaderData();
+  const fetcher = useFetcher()
+
+  useEffect(() => {
+    if (!fetcher.data && fetcher.state === 'idle')
+      fetcher.load('/menu')
+  }, [fetcher])
+
   const { id, status, priority, priorityPrice, orderPrice, estimatedDelivery, cart } =
     order;
   const deliveryIn = calculateMinsLeft(estimatedDelivery);
@@ -34,7 +44,9 @@ const Order = () => {
       </div>
       <ul className="divide-y divide-stone-200 border-y">
         {
-          cart.map((item) => <OrderItem key={item.id} item={item} />)
+          cart.map((item) => <OrderItem key={item.pizzaId} ingredients={
+            fetcher.data ? fetcher.data.find((pizza) => pizza.id === item.pizzaId).ingredients : []
+          } ingredientsLoading={fetcher.state === 'loading'} item={item} />)
         }
       </ul>
       <div className="space-y-2 bg-stone-200 py-5 px-6">
@@ -42,8 +54,12 @@ const Order = () => {
         {priority && <p className="text-sm font-medium text-stone-600">Priority price : {formatCurrency(priorityPrice)}</p>}
         <p className="font-bold">To pay on delivery : {formatCurrency(orderPrice + priorityPrice)}</p>
       </div>
+      {
+        !priority && <UpdateOrder order={order} />
+      }
     </div>
   );
 };
+
 
 export default Order;
